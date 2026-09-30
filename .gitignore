@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment
+.env
+backend/.env
+frontend/.env.local
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Alembic
+# (keep versions/ tracked)
+
+# Temp / generated
+*.pcap
+*.pcapng
+remediation_*.conf
+*.pdf
+
+# Pycache from core
+core/**/__pycache__/
+core/**/*.pyc

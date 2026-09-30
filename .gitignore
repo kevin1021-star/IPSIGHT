@@ -20,14 +20,30 @@ node_modules/
 frontend/dist/
 frontend/.vite/
 
-# OS
+# OS & IDE
 .DS_Store
 Thumbs.db
-
-# IDE
 .vscode/
 .idea/
 *.swp
+
+# Temporary PPT generator scripts & presentation files
+*.pptx
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.db
+*.sqlite
+*.sqlite3
+*.bat
+build_*.py
+generate_*.py
+create_*.py
+demo_*.py
+cipher_sentinel_cli.py
+update_*.py
+~$*
 
 # Alembic
 # (keep versions/ tracked)
@@ -36,8 +52,3 @@ Thumbs.db
 *.pcap
 *.pcapng
 remediation_*.conf
-*.pdf
-
-# Pycache from core
-core/**/__pycache__/
-core/**/*.pyc

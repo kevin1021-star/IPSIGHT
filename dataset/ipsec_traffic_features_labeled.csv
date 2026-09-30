@@ -1,0 +1,9 @@
+sample_id,scenario_name,ike_version,exchange_mode,enc_algo,auth_algo,dh_group,pfs_enabled,mean_pkt_size,std_pkt_size,inter_arrival_mean_ms,inter_arrival_std_ms,byte_entropy,qtei_score,traffic_class,cve_vulnerability_flag,nist_compliance_verdict
+SCN-001,Legacy_Cisco_3DES_MD5,IKEv1,Main Mode,3DES-CBC,HMAC-MD5,Group 2 (1024-bit),No,142.4,48.2,42.1,12.3,7.89,88,VoIP,CVE-2016-2183 (Sweet32),NON_COMPLIANT
+SCN-002,Fortinet_Aggressive_PSK,IKEv1,Aggressive Mode,AES-CBC-128,HMAC-SHA1,Group 14 (2048-bit),No,184.6,56.1,15.4,5.2,7.94,65,Web/HTTPS,PSK_Cleartext_Sniffing,NON_COMPLIANT
+SCN-003,strongSwan_PQC_Ready,IKEv2,IKE_SA_INIT,AES-GCM-256,AEAD,Group 20 (NIST P-384),Yes,312.8,84.5,8.2,2.1,7.99,10,Bulk Transfer,None,COMPLIANT
+SCN-004,Enterprise_DES_Transit,IKEv1,Main Mode,DES-CBC,HMAC-SHA1,Group 1 (768-bit),No,96.2,32.4,95.0,30.1,7.65,98,SSH/CLI,Logjam / DES_Exhaustion,CRITICAL_RISK
+SCN-005,Defense_WAN_AES192_SHA2,IKEv2,IKE_SA_INIT,AES-CBC-192,HMAC-SHA2-256,Group 19 (Curve25519),Yes,220.5,62.3,24.5,6.4,7.98,25,Video Telemetry,None,COMPLIANT
+SCN-006,Anomalous_SPI_Flood_Attack,IKEv2,INFORMATIONAL,AES-CBC-256,HMAC-SHA2-256,Group 14 (2048-bit),No,64.0,0.0,0.4,0.1,7.92,72,DoS Attack,State_Exhaustion,ANOMALY_DETECTED
+SCN-007,Cloud_Gateway_AES128GCM,IKEv2,IKE_SA_INIT,AES-GCM-128,AEAD,Group 14 (2048-bit),Yes,260.1,71.0,12.0,3.5,7.98,30,Web API,None,COMPLIANT
+SCN-008,Post_Quantum_Hybrid_KEM,IKEv2,IKE_INTERMEDIATE,AES-GCM-256,AEAD,RFC 9370 ML-KEM-768,Yes,480.2,110.4,5.1,1.2,7.99,5,Classified Defense,None,PQC_SECURE

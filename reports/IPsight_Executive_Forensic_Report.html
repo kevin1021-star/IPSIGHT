@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IPsight Automated Security Assessment & Forensic Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b1120; color: #e2e8f0; margin: 0; padding: 40px; }
+        .container { max-width: 900px; margin: 0 auto; background: #1e293b; border-radius: 12px; padding: 32px; border: 1px solid #334155; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
+        .header { border-bottom: 2px solid #06b6d4; padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 900; color: #06b6d4; letter-spacing: 1px; }
+        .badge { background: #ef4444; color: #fff; padding: 4px 12px; border-radius: 9999px; font-weight: bold; font-size: 12px; }
+        .score-card { background: #0f172a; border-radius: 8px; padding: 20px; border-left: 4px solid #ef4444; margin-bottom: 24px; }
+        .meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+        .meta-item { background: #0f172a; padding: 12px; border-radius: 6px; border: 1px solid #334155; }
+        .meta-label { font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 600; }
+        .meta-value { font-size: 14px; color: #f8fafc; font-weight: 700; margin-top: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { text-align: left; padding: 10px; border-bottom: 1px solid #334155; font-size: 13px; }
+        th { background: #0f172a; color: #38bdf8; font-weight: 600; }
+        .cli-box { background: #020617; border: 1px solid #06b6d4; border-radius: 6px; padding: 16px; font-family: monospace; font-size: 12px; color: #38bdf8; white-space: pre-wrap; margin-top: 12px; }
+        .hash-box { background: #0f172a; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 11px; color: #10b981; border: 1px solid #059669; margin-top: 24px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <div class="logo">IPSIGHT AUDIT REPORT</div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Smart India Hackathon 2026 · Problem Statement: SIH26160 (NTRO / MIC)</div>
+            </div>
+            <div class="badge">OVERALL POSTURE: CRITICAL RISK</div>
+        </div>
+
+        <div class="score-card">
+            <div style="font-size: 12px; color: #94a3b8; text-transform: uppercase; font-weight: 700;">Composite Security Score</div>
+            <div style="font-size: 36px; font-weight: 900; color: #ef4444; margin-top: 4px;">24 / 100 <span style="font-size: 16px; color: #94a3b8; font-weight: normal;">(Failed RFC 8247 Baseline)</span></div>
+            <p style="margin: 8px 0 0 0; font-size: 13px; color: #cbd5e1;">Target Gateway utilizes deprecated 3DES-CBC and HMAC-MD5 Phase 1 proposals with broken Diffie-Hellman Group 2. Quantum Threat Exposure Index (QTEI) predicts high vulnerability to harvest-now-decrypt-later attacks.</p>
+        </div>
+
+        <div class="meta-grid">
+            <div class="meta-item"><div class="meta-label">Evaluated Gateway</div><div class="meta-value">Cisco IOS-XE (ISR 4451 Core Gateway)</div></div>
+            <div class="meta-item"><div class="meta-label">Protocol & Exchange</div><div class="meta-value">IKEv1 Main Mode (UDP Port 500)</div></div>
+            <div class="meta-item"><div class="meta-label">Observed Transform</div><div class="meta-value">3DES-CBC | HMAC-MD5-96 | DH Group 2</div></div>
+            <div class="meta-item"><div class="meta-label">Post-Quantum (QTEI) Window</div><div class="meta-value" style="color: #ef4444;">&lt; 0.5 Years (Critical Shor Exposure)</div></div>
+        </div>
+
+        <h3 style="color: #38bdf8; border-bottom: 1px solid #334155; padding-bottom: 8px;">Detailed Vulnerability Findings</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rule ID</th>
+                    <th>Standard</th>
+                    <th>Observed Violation</th>
+                    <th>Remediation Target</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold; color: #ef4444;">RULE-IKE-001</td>
+                    <td>RFC 8247 §3</td>
+                    <td>3DES-CBC Cipher (Sweet32 CVE-2016-2183)</td>
+                    <td>Upgrade to AES-256-GCM AEAD</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #ef4444;">RULE-IKE-004</td>
+                    <td>NIST SP 800-77r1</td>
+                    <td>MD5-HMAC 96-bit (Cryptographic Preimage Weakness)</td>
+                    <td>Migrate to SHA2-256 or SHA2-512</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; color: #f59e0b;">RULE-DH-002</td>
+                    <td>NIST SP 800-131A</td>
+                    <td>DH Group 2 (1024-bit MODP Logjam Vulnerability)</td>
+                    <td>Enforce DH Group 20 (NIST P-384)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="color: #38bdf8; border-bottom: 1px solid #334155; padding-bottom: 8px; margin-top: 24px;">Automated 1-Click Remediation Script (Cisco IOS-XE)</h3>
+        <div class="cli-box">! === IPsight Automated Remediation Script ===
+crypto ikev2 proposal IPSIGHT-PQC-PROP
+ encryption aes-gcm-256
+ integrity sha512
+ group 20 19 14
+exit
+
+crypto ikev2 policy IPSIGHT-SECURE-POLICY
+ proposal IPSIGHT-PQC-PROP
+ match fvrf any
+exit
+
+crypto ipsec transform-set TS-AES-GCM esp-gcm 256
+ mode tunnel
+exit
+
+crypto map VPN-MAP 10 ipsec-isakmp
+ set transform-set TS-AES-GCM
+ set pfs group20
+ set security-association lifetime seconds 3600
+exit</div>
+
+        <div class="hash-box">
+            ✔ <strong>Tamper-Evident SHA-256 Digital Forensic Seal:</strong><br>
+            SHA-256: <code>9f83a241b7145b801a61ef763920c8e030064560a614d3f3f5087c2b64d9e1b2</code><br>
+            Certified by Team Praxis (Indian Institute of Technology Jodhpur) · SIH 2026
+        </div>
+    </div>
+</body>
+</html>

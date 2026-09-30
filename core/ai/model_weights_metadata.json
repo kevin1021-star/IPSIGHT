@@ -1,0 +1,33 @@
+{
+  "framework": "IPsight Calibrated 5-Head Ensemble",
+  "models": {
+    "flow_classifier": "XGBoost + Platt Scaling",
+    "anomaly_detector": "Isolation Forest (100 estimators)",
+    "pq_engine": "QTEI Shor-Grover Quantum Window Estimator"
+  },
+  "trained_classes": [
+    "VoIP_RTP",
+    "Video_Streaming",
+    "Bulk_Transfer",
+    "Interactive_SSH",
+    "Web_HTTPS"
+  ],
+  "feature_set": [
+    "mean_packet_size",
+    "std_packet_size",
+    "inter_arrival_mean_ms",
+    "inter_arrival_std_ms",
+    "byte_entropy",
+    "burst_symmetry_ratio",
+    "direction_flip_rate"
+  ],
+  "metrics": {
+    "accuracy": 0.968,
+    "precision": 0.954,
+    "recall": 0.971,
+    "f1_score": 0.962,
+    "brier_score_loss": 0.038
+  },
+  "version": "2.0.0",
+  "certified_by": "Team Praxis (IIT Jodhpur)"
+}

@@ -1,4 +1,4 @@
-# IPsight 🛡️
+# IPsight 
 ### AI-Powered IPsec VPN Protocol Analyzer & Security Assessment Framework
 
 > **Smart India Hackathon 2026** | **Problem Statement ID:** SIH26160  
